@@ -4,248 +4,753 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Distribuidora de Bebidas Coca Cola Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    --red: #E00000;
+    --red-dark: #b00000;
+    --red-light: #ff2020;
+    --black: #111111;
+    --white: #ffffff;
+    --yellow: #FFE600;
+    --gray-dark: #1c1c1c;
+    --gray-mid: #2e2e2e;
+    --gray-light: #f2f2f2;
+  }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #ffffff;
-    width: 100%;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* SEÇÕES GERAIS */
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
 
-.section-red {
-    background: #ff0000;
-    color: #ffffff;
+  /* ── HERO ── */
+  .hero {
+    background: var(--red);
+    background-image: radial-gradient(ellipse at 80% 20%, #ff4444 0%, var(--red) 60%, var(--red-dark) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 60px 24px 80px;
     text-align: center;
-    padding: 25px 20px;
-}
+  }
 
-.section-white {
-    background: #ffffff;
-    text-align: center;
-    padding: 25px 20px;
-}
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
 
-.section-gray {
-    background: #3a3a3a;
-    color: #ffffff;
-    text-align: center;
-    padding: 25px 20px;
-}
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.08);
+  }
 
-/* BOTÕES */
-
-.btn-yellow {
-    background: #fff200;
-    padding: 12px 25px;
+  .hero-badge {
     display: inline-block;
-    border-radius: 8px;
-    font-weight: bold;
-    color: #000000;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 10vw, 64px);
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 span {
+    color: var(--yellow);
+  }
+
+  .hero p {
+    color: rgba(255,255,255,0.88);
+    font-size: 15px;
+    font-weight: 500;
+    max-width: 380px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 16px 32px;
+    border-radius: 100px;
     text-decoration: none;
-    margin-top: 15px;
-    font-size: 16px;
-}
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transition: transform .2s, box-shadow .2s;
+  }
 
-/* CAIXAS */
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  }
 
-.box-white {
-    background: #ffffff;
-    color: #000;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 20px auto;
-    width: 85%;
+  .btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  .hero-note {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--black);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .stat-item {
+    flex: 1;
+    min-width: 120px;
     text-align: center;
-}
+    padding: 20px 12px;
+    border-right: 1px solid #2a2a2a;
+  }
 
-.box-light {
-    background: #f5f5f5;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 12px auto;
-    width: 85%;
-    color: #000000;
-}
+  .stat-item:last-child { border-right: none; }
 
-/* IMAGENS */
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--yellow);
+    line-height: 1;
+  }
 
-.img-main {
+  .stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SOBRE ── */
+  .about {
+    padding: 64px 24px;
+    text-align: center;
+    background: var(--white);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  .about h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 8vw, 46px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .about p {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+
+  .about img {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+    border-radius: 16px;
+    margin: 28px auto 0;
     display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-}
+    box-shadow: 0 20px 60px rgba(220,0,0,0.15);
+  }
 
-.img-freezer {
+  /* ── COMO FUNCIONA ── */
+  .how {
+    background: var(--red);
+    background-image: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 100%);
+    padding: 64px 24px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .how::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .how h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 8vw, 50px);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .how .subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 40px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto 36px;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    text-align: left;
+    backdrop-filter: blur(4px);
+  }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--yellow);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .coupon-box {
+    background: var(--yellow);
+    color: var(--black);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 400px;
+    margin: 32px auto 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .coupon-box .coupon-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 8px;
+  }
+
+  .coupon-code {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    background: rgba(0,0,0,0.08);
+    padding: 8px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 8px 0;
+  }
+
+  /* ── PRODUTOS ── */
+  .products {
+    background: var(--gray-dark);
+    padding: 64px 24px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .products h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 8vw, 48px);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .products .subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 36px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto 32px;
+  }
+
+  .card {
+    background: var(--gray-mid);
+    border: 1px solid #3a3a3a;
+    border-radius: 14px;
+    padding: 22px 20px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--red);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+  }
+
+  /* ── SERVIÇOS ── */
+  .services {
+    background: var(--white);
+    padding: 64px 24px;
+    text-align: center;
+  }
+
+  .services h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 8vw, 48px);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+
+  .services .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 36px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto 32px;
+  }
+
+  .service-card {
+    background: var(--gray-light);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: left;
+  }
+
+  .service-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .service-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--black);
+  }
+
+  .service-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* ── FREEZER ── */
+  .freezer {
+    background: var(--red);
+    background-image: linear-gradient(160deg, var(--red) 0%, var(--red-dark) 100%);
+    padding: 64px 24px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .freezer h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 8vw, 48px);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .freezer p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    max-width: 380px;
+    margin: 0 auto 28px;
+    line-height: 1.65;
+  }
+
+  .freezer img {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-}
+    margin: 0 auto 28px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
 
-/* WHATSAPP BOLA */
+  /* ── CONTATO ── */
+  .contact {
+    background: var(--black);
+    padding: 64px 24px;
+    text-align: center;
+    color: #fff;
+  }
 
-.whats-round-btn {
-    width: 70px;
-    height: 70px;
-    margin: 20px auto;
+  .contact h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 7vw, 44px);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .contact p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 18px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.35);
+    transition: transform .2s, box-shadow .2s;
+  }
+
+  .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(37, 211, 102, 0.45);
+  }
+
+  .btn-whatsapp svg { width: 22px; height: 22px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a0a;
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* ── FLOAT WHATSAPP ── */
+  .float-whats {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .float-label {
+    background: #E00000;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 100px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    animation: fadeInOut 12s ease infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes fadeInOut {
+    0%, 10% { opacity: 0; transform: translateX(10px); }
+    20%, 75% { opacity: 1; transform: translateX(0); }
+    90%, 100% { opacity: 0; transform: translateX(10px); }
+  }
+
+  .float-btn {
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+    transition: transform .2s;
+  }
+
+  .float-btn:hover { transform: scale(1.08); }
+  .float-btn svg { width: 32px; height: 32px; }
+
+  /* ── DIVISOR WAVE ── */
+  .wave {
     display: block;
-}
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave svg { display: block; width: 100%; }
 
 </style>
 </head>
 <body>
 
-<!-- TOPO VERMELHO -->
-<div class="section-red">
-    <h1>DISTRIBUIDORA DE BEBIDAS<br>COCA COLA BRASIL</h1>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-badge">🇧🇷 Atendimento em todo Brasil</div>
+  <h1>DISTRIBUIDORA<br>DE BEBIDAS<br><span>COCA COLA</span><br>BRASIL</h1>
+  <p>Seu parceiro de bebidas no atacado. Catálogo digital, entrega rápida e condições exclusivas para o seu comércio.</p>
+  <a class="btn-primary" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.558 4.13 1.535 5.862L.057 23.571a.75.75 0 0 0 .92.92l5.709-1.478A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.653-.52-5.168-1.427l-.368-.217-3.385.877.896-3.286-.237-.382A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Fazer Cadastro
+  </a>
+  <p class="hero-note">Pessoa Física (CPF) ou Jurídica (CNPJ)</p>
+</section>
 
-    <p>Seu Distribuidor de Bebidas em atacado</p>
-
-    <a class="btn-yellow" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">Fazer Cadastro</a>
-
-    <p style="margin-top:18px; font-size:14px;">
-        ATENDENDO EM TODO BRASIL, entregamos em todo território nacional.
-    </p>
+<!-- ═══ STATS ═══ -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">48H</div>
+    <div class="stat-label">Entrega</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">BR</div>
+    <div class="stat-label">Todo Brasil</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">PJ/PF</div>
+    <div class="stat-label">Cadastro</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">10%</div>
+    <div class="stat-label">1° Pedido</div>
+  </div>
 </div>
 
-<!-- SEÇÃO BRANCA -->
-<div class="section-white">
-    <h2>Distribuidora de Bebidas<br>Coca Cola Brasil</h2>
+<!-- ═══ SOBRE ═══ -->
+<section class="about">
+  <span class="section-tag">Quem somos</span>
+  <h2>Bebidas no Atacado<br>de Verdade</h2>
+  <p>Nossa distribuidora opera de forma <strong>100% digital</strong>, segura e simplificada para o seu comércio. Sem burocracia, sem complicação.</p>
+  <p>Faça seu cadastro e tenha acesso ao nosso catálogo digital com condições exclusivas para a sua região.</p>
+  <img src="https://i.imgur.com/E9VUnCV.png" alt="Bebidas Coca Cola">
+</section>
 
-    <p>A nossa Distribuidora de Bebidas opera de forma digital, segura e simplificada para seu comércio.</p>
+<!-- ═══ COMO FUNCIONA ═══ -->
+<section class="how">
+  <span class="section-tag" style="color:rgba(255,255,255,0.5)">Simples assim</span>
+  <h2>COMO FUNCIONA?</h2>
+  <p class="subtitle">Processo 100% digital, do cadastro até a entrega na sua porta.</p>
 
-    <p>Faça seu cadastro e tenha acesso ao nosso catálogo digital, aproveite condições exclusivas para o seu comércio.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">Faça seu Cadastro</div>
+        <div class="step-desc">Cadastro simples via WhatsApp. Pode ser feito com CPF ou CNPJ do seu estabelecimento.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <div class="step-title">Acesse o Catálogo</div>
+        <div class="step-desc">Após a aprovação, você acessa nosso catálogo digital com todos os produtos e preços da sua região.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">Faça seu Pedido</div>
+        <div class="step-desc">Escolha os produtos, finalize o pedido e receba em até 48 horas direto no seu estabelecimento.</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- IMAGEM DAS BEBIDAS -->
-    <img class="img-main" src="https://i.imgur.com/E9VUnCV.png">
+  <a class="btn-primary" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
+    Quero me Cadastrar
+  </a>
 
-    <!-- BOTÃO WHATSAPP -->
-    <a target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
-        <img class="whats-round-btn" src="https://i.imgur.com/8bgILWt.png">
-    </a>
+  <div class="coupon-box">
+    <div class="coupon-label">🎁 Cupom de desconto</div>
+    <div class="coupon-code">FRETEGRATIS100</div>
+    <p style="font-size:13px; margin-top:8px;">Use no 1° pedido acima de <strong>R$ 1.000,00</strong> e ganhe <strong>10% de desconto</strong></p>
+  </div>
+</section>
+
+<!-- ═══ PRODUTOS ═══ -->
+<section class="products">
+  <span class="section-tag" style="color: var(--red)">Portfólio</span>
+  <h2>NOSSOS PRODUTOS</h2>
+  <p class="subtitle">Catálogo digital atualizado com os melhores produtos</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">🥤 Bebidas Diversificadas</div>
+      <div class="card-desc">Água, sucos, refrigerantes e bebidas diversificadas para todo tipo de comércio.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📱 Catálogo Digital</div>
+      <div class="card-desc">Acesse todos os produtos e valores disponíveis após realizar seu cadastro.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🚚 Entrega Rápida</div>
+      <div class="card-desc">Atendimento em todo o Brasil com centrais de distribuição parceiras. Entrega em até 48h.</div>
+    </div>
+  </div>
+
+  <a class="btn-primary" style="background: var(--yellow);" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
+    Ver Catálogo Digital
+  </a>
+</section>
+
+<!-- ═══ SERVIÇOS ═══ -->
+<section class="services">
+  <span class="section-tag">O que oferecemos</span>
+  <h2>NOSSOS SERVIÇOS</h2>
+  <p class="subtitle">Tudo que seu comércio precisa em um só lugar</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">📦</span>
+      <div class="service-title">Bebidas no Atacado</div>
+      <div class="service-desc">Preços exclusivos para todos os produtos do catálogo.</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧊</span>
+      <div class="service-title">Comodatos</div>
+      <div class="service-desc">Freezer, geladeira expositora e materiais de divulgação.</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💡</span>
+      <div class="service-title">Consultoria</div>
+      <div class="service-desc">Suporte para aumentar o desempenho do seu estabelecimento.</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💳</span>
+      <div class="service-title">Pagamento Fácil</div>
+      <div class="service-desc">Formas de pagamento facilitadas e entregas rápidas.</div>
+    </div>
+  </div>
+
+  <a class="btn-primary" style="background: var(--red); color: #fff;" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
+    Falar com Representante
+  </a>
+</section>
+
+<!-- ═══ FREEZER ═══ -->
+<section class="freezer">
+  <span class="section-tag" style="color: rgba(255,255,255,0.5)">Comodato</span>
+  <h2>SOLICITE SEU<br>FREEZER</h2>
+  <p>Descubra as opções de fornecimento de freezer sem custo de mensalidade. Disponibilidade sujeita à movimentação de pedidos.</p>
+  <img src="https://i.imgur.com/mx9WmUp.png" alt="Freezer Coca Cola">
+  <a class="btn-primary" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
+    Solicitar Freezer
+  </a>
+</section>
+
+<!-- ═══ CONTATO ═══ -->
+<section class="contact">
+  <span class="section-tag" style="color: rgba(255,255,255,0.3)">Fale conosco</span>
+  <h2>ENTRE EM<br>CONTATO</h2>
+  <p>Fale com nosso time via WhatsApp e receba o catálogo completo de produtos.</p>
+  <a class="btn-whatsapp" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.558 4.13 1.535 5.862L.057 23.571a.75.75 0 0 0 .92.92l5.709-1.478A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.653-.52-5.168-1.427l-.368-.217-3.385.877.896-3.286-.237-.382A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Falar via WhatsApp
+  </a>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  © 2025 DISTRIBUIDORA DE BEBIDAS COCA COLA BRASIL · TODOS OS DIREITOS RESERVADOS
+</footer>
+
+<!-- ═══ FLOAT WHATSAPP ═══ -->
+<div class="float-whats">
+  <div class="float-label">Fale conosco via WhatsApp</div>
+  <a class="float-btn" target="_blank" href="https://api.whatsapp.com/send?phone=5513974164598&text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es">
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.558 4.13 1.535 5.862L.057 23.571a.75.75 0 0 0 .92.92l5.709-1.478A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.653-.52-5.168-1.427l-.368-.217-3.385.877.896-3.286-.237-.382A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
 </div>
-
-<!-- COMO FUNCIONA -->
-<div class="section-red">
-    <h2>COMO FUNCIONA ?</h2>
-
-    <p>Somos uma distribuidora de bebidas que atende de forma totalmente digital. Você preenche um cadastro simples e pronto. Nós iniciamos o processamento do pedido e o atendimento em todo o BRASIL.</p>
-
-    <p><strong>Faça seu cadastro</strong></p>
-
-    <p>Após realizar o seu cadastro e ser aprovado, você terá acesso ao nosso catalogo digital de produtos, de acordo com a sua região ea disponibilidade dos produtos junto as centrais de distribuições locais de sua região.</p>
-
-    <a class="btn-yellow" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">Fazer Cadastro</a>
-
-    <h3 style="margin-top:30px;">Quem pode fazer cadastro?</h3>
-
-    <p>O cadastro pode ser realizado por pessoa jurídica através do CNPJ de sua empresa ou estabelecimento comercial ou pode ser realizado o cadastro pessoa física por CPF.</p>
-
-    <p>Comercializamos os produtos em atacado para que você tenha maiores descontos, assim podendo então fracionar os produtos e comercializar.</p>
-
-     <p>Solicite tambem a tabela de valores sugeridos para a sua região.</p>
-
-    <div class="box-white">
-        <strong>CUPOM DE DESCONTO</strong><br><br>
-        Use o código <strong>FRETEGRATIS100</strong> e receba 10% de desconto em seu primeiro pedido com valor superior a R$ 1.000,00
-    </div>
-</div>
-
-<!-- PRODUTOS -->
-<div class="section-gray">
-    <h2>Nossos Produtos</h2>
-
-    <p>Distribuímos bebidas de qualidade em todo o Brasil. Atendimento com catálogo digital atualizado.</p>
-
-    <div class="box-light">
-        <strong>Bebidas Diversificadas</strong><br>
-        Água, Sucos, Refrigerantes e Bebidas Diversificadas
-    </div>
-
-    <div class="box-light">
-        <strong>Catálogo Digital</strong><br>
-        Clientes podem acessar nosso catálogo digital após realizar o cadastro e consultar todos os produtos e os valores disponíveis.
-    </div>
-
-     <div class="box-light">
-        <strong>Serviço de Entrega</strong><br>
-        Atendimento em todo Brasil com centrais de distribuições parceiras. <br><br>
-Entrega em até 48 horas.
-    </div>
-
-    <a class="btn-yellow" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">Catálogo Digital</a>
-</div>
-
-<!-- SERVIÇOS -->
-<div class="section-red">
-    <h2>Nossos Serviços</h2>
-
-    <div class="box-white">
-        <strong>Bebidas no Atacado</strong><br>
-        Todos os produtos podem ser adquiridos com preços exclusivos.
-    </div>
-
-     <div class="box-white">
-        <strong>Comodatos</strong><br>
-        Clientes podem solicitar comodato de produtos como Freezer, Geladeira Expositora e materiais de divulgação.
-    </div>
-    
-
-    <div class="box-white">
-        <strong>Consultoria</strong><br>
-        Nossa equipe oferece orientação e suporte para aumentar o desempenho do estabelecimento.
-    </div>
-
-    <div class="box-white">
-        <strong>Entrega e Pagamento</strong><br>
-        Atendemos todo o Brasil com pagamentos facilitados e entregas rápidas.
-    </div>
-
-    <a class="btn-yellow" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">Catálogo Digital</a>
-</div>
-
-<!-- FREEZER -->
-<div class="section-white">
-    <h2>Solicite seu Freezer</h2>
-
-    <p>Descubra as opções de fornecimento de freezer sem custo de mensalidade.</p>
-
-    <!-- IMAGEM -->
-    <img class="img-freezer" src="https://i.imgur.com/mx9WmUp.png">
-
-    <p>A disponibilização do freezer está sujeita à movimentação de pedidos.</p>
-
-    <a class="btn-yellow" target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">Falar com Representante</a>
-</div>
-
-<!-- CONTATO -->
-<div class="section-white">
-    <h2>Entre em Contato Conosco</h2>
-
-    <p>Fale conosco e receba nosso catálogo de produtos.</p>
-
-    <!-- BOTÃO WHATSAPP -->
-    <a target="_blank" href="https://api.whatsapp.com/send/?phone=5513974164598&text=Ol%C3%A1%2C+vim+do+Google+e+gostaria+de+atendimento&type=phone_number&app_absent=0">
-        <img class="whats-round-btn" src="https://i.imgur.com/8bgILWt.png">
-    </a>
-</div>
-
-<!-- START Widget WhastApp hospedagemwordpresspro -->
-<a href="https://api.whatsapp.com/send?phone=5513974164598&text=Olá!%20Gostaria%20de%20mais%20informações" id="waurlsite" class="bt-whatsApp" target="_blank" style="right:25px; position:fixed;width:60px;height:60px;bottom:40px;z-index:100;">
-<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMjYxOSA1MDYgMTIwIDEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogIzI3ZDA0NTsKICAgICAgfQoKICAgICAgLmNscy0yLCAuY2xzLTUgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgc3Ryb2tlOiAjZmZmOwogICAgICAgIHN0cm9rZS13aWR0aDogNXB4OwogICAgICB9CgogICAgICAuY2xzLTMgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgc3Ryb2tlOiBub25lOwogICAgICB9CiAgICA8L3N0eWxlPjwvZGVmcz48ZyBkYXRhLW5hbWU9Ikdyb3VwIDM2IiBpZD0iR3JvdXBfMzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIzMDAgNzMpIj48Y2lyY2xlIGNsYXNzPSJjbHMtMSIgY3g9IjYwIiBjeT0iNjAiIGRhdGEtbmFtZT0iRWxsaXBzZSAxOCIgaWQ9IkVsbGlwc2VfMTgiIHI9IjYwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMTkgNDMzKSIvPjxnIGRhdGEtbmFtZT0iR3JvdXAgMzUiIGlkPSJHcm91cF8zNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0IDM4NikiPjxnIGRhdGEtbmFtZT0iR3JvdXAgMzQiIGlkPSJHcm91cF8zNCI+PGcgY2xhc3M9ImNscy0yIiBkYXRhLW5hbWU9IkVsbGlwc2UgMTkiIGlkPSJFbGxpcHNlXzE5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCA3NSkiPjxjaXJjbGUgY2xhc3M9ImNscy00IiBjeD0iMzEuNSIgY3k9IjMxLjUiIHI9IjMxLjUiLz48Y2lyY2xlIGNsYXNzPSJjbHMtNSIgY3g9IjMxLjUiIGN5PSIzMS41IiByPSIyOSIvPjwvZz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xNDI0LDE5MWwtNC42LDE2LjMsMTYuOS00LjcuOS01LjItMTEsMy41LDIuOS0xMC41WiIgZGF0YS1uYW1lPSJQYXRoIDEyNiIgaWQ9IlBhdGhfMTI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTMyNSAtNjgpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTI2Niw5MGMwLS4xLDMuNS0xMS43LDMuNS0xMS43bDguNCw3LjlaIiBkYXRhLW5hbWU9IlBhdGggMTI3IiBpZD0iUGF0aF8xMjciIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTY1IDQzKSIvPjwvZz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xNDM5LjMsMTYwLjZhOS40LDkuNCwwLDAsMC0zLjksNi4xYy0uNSwzLjksMS45LDcuOSwxLjksNy45YTUwLjg3Niw1MC44NzYsMCwwLDAsOC42LDkuOCwzMC4xODEsMzAuMTgxLDAsMCwwLDkuNiw1LjEsMTEuMzc4LDExLjM3OCwwLDAsMCw2LjQuNiw5LjE2Nyw5LjE2NywwLDAsMCw0LjgtMy4yLDkuODUxLDkuODUxLDAsMCwwLC42LTIuMiw1Ljg2OCw1Ljg2OCwwLDAsMCwwLTJjLS4xLS43LTcuMy00LTgtMy44cy0xLjMsMS41LTIuMSwyLjYtMS4xLDEuNi0xLjksMS42LTQuMy0xLjQtNy42LTQuNGExNS44NzUsMTUuODc1LDAsMCwxLTQuMy02cy42LS43LDEuNC0xLjhhNS42NjQsNS42NjQsMCwwLDAsMS4zLTIuNGMwLS41LTIuOC03LjYtMy41LTcuOUExMS44NTIsMTEuODUyLDAsMCwwLDE0MzkuMywxNjAuNloiIGRhdGEtbmFtZT0iUGF0aCAxMjgiIGlkPSJQYXRoXzEyOCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEzMjYuMzMyIC02OC40NjcpIi8+PC9nPjwvZz48L3N2Zz4=" alt="" width="60px">
-</a>
-<span id="alertWapp" style="right:30px; visibility: hidden; position:fixed;	width:17px;	height:17px;bottom:90px; background:red;z-index:101; font-size:11px;color:#fff;text-align:center;border-radius: 50px; font-weight:bold;line-height: normal; "> 1 </span>
-<div id="msg1" style="right: 90px; visibility: visible; background: #c11209; color: #fff; position: fixed; width: 200px; bottom: 52px; text-align: center; font-size: 13px; line-height: 31px; height: 32px; border-radius: 100px; z-index: 100; ">Fale conosco via WhatsApp</div>
-<script type="text/javascript">function showIt2() {document.getElementById("msg1").style.visibility = "visible";}    setTimeout("showIt2()", 5000); function hiddenIt() {document.getElementById("msg1").style.visibility = "hidden";}setTimeout("hiddenIt()", 15000); function showIt3() {document.getElementById("msg1").style.visibility = "visible";} setTimeout("showIt3()", 25000);  msg1.onclick = function() {document.getElementById('msg1').style.visibility = "hidden"; };function alertW() { document.getElementById("alertWapp").style.visibility = "visible";	} setTimeout("alertW()", 15000); </script>
-<!-- END Widget WhastApp -->
-
 
 </body>
 </html>
